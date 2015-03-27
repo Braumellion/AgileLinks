@@ -1,0 +1,43 @@
+var request = require('supertest');
+var app = require('../app.js');
+
+describe('Users', function() {
+	
+	it('GET /users/', function(done) {
+		request(app)
+			.get('/users/')
+			.expect('Content-Type', /json/)
+			.expect(200, done);
+	});
+
+	it('GET /users/?max=-1 - should receive an 400 error', function(done) {
+		request(app)
+			.get('/users/?max=-1')
+			.expect(400, done);
+	});
+
+	it('GET /users/?max=1 - should receive 200 status and array with one element', function(done) {
+		request(app)
+			.get('/users/?max=1')
+			.expect('Content-Type', /json/)
+			.expect(200)
+			.end(function(err, res) {
+				if (err) done(err);
+				expect(res.body.length).toBe(1);
+				done();
+			});
+	});
+
+	it('POST /users/ - should receive 200 status', function(done) {
+		request(app)
+			.post('/users/')
+			.send({
+				firstName: 'Jack',
+				lastName: 'Black',
+				email: 'jackblack@example.com',
+				password: 'spiderman'
+			})
+			.expect(200, done);
+	});
+
+});
