@@ -49,21 +49,20 @@ router.get('/total', function(req, res) {
 });
 
 
-router.get('/:id/show', function(req, res) {
-	var id = req.params.id;
+router.route('/:id')
 
-	if (id.lenth > 1024) {
-		res.status(400).end();
-	}
 
-	UserModel.findOne({ _id: id }, function(err, user) {
-		if (err) {
-			res.status(404).end();
-		}
+	.get(function(req, res) {
+		var id = req.params.id;
 
-		res.json(user);
+		UserModel.findOne({ _id: id }, function(err, user) {
+			if (err) {
+				res.status(404).end();
+			}
+
+			res.json(user);
+		});
+
 	});
-
-});
 
 module.exports = router;
