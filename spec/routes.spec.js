@@ -53,8 +53,4 @@ describe('Users', function() {
 			.expect(200, done);
 	});
 
-	UserModel.remove({}, function(err) { 
-   		console.log('collection removed') 
-	});	
-
 });
