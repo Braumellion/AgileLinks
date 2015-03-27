@@ -6,11 +6,13 @@ var UserModel = require('../model/user').UserModel;
 router.route('/')
 
 	.get(function(req, res) {
-		var l = parseInt(req.query.limit) || 1;
-		if (l <= 0) {
+		var skip = parseInt(req.query.skip) || 0; 
+		var max = parseInt(req.query.max) || 1;
+
+		if (max <= 0) {
 			res.status(400).end();
 		} else {
-			UserModel.find({}).limit(l).exec(function (err, users) {
+			UserModel.find({}).limit(max).skip(skip).exec(function (err, users) {
 	    		if (err) {
 	    			console.log(err);
 	    			res.status(500).end();
