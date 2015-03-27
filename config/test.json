@@ -1,0 +1,12 @@
+{
+	"database": {
+		"uri": "mongodb://localhost/test",
+		"db": {
+			"db": { "native_parser": true },
+  			"server": { "poolSize": 5 },
+  			"replset": {},
+  			"user": "test",
+  			"pass": ""
+		}
+	}
+}
