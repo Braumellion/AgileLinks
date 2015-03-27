@@ -16,5 +16,8 @@
     "mongoose": "^4.0.0",
     "morgan": "~1.5.1",
     "serve-favicon": "~2.2.0"
+  },
+  "devDependencies": {
+    "supertest": "^0.15.0"
   }
 }
