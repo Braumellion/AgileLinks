@@ -5,7 +5,7 @@
   "scripts": {
     "pretest": "npm install -g jasmine-node",
     "start": "node ./bin/www",
-    "test": "jasmine-node --verbose spec/"
+    "test": "jasmine-node --forceexit --verbose spec/"
   },
   "dependencies": {
     "body-parser": "~1.12.0",
