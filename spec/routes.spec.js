@@ -1,6 +1,6 @@
 var request = require('supertest');
 var app = require('../app.js');
-var UserModel = require('../model/user');
+var UserModel = require('../model/user').UserModel;
 
 describe('Users', function() {
 	
@@ -14,7 +14,7 @@ describe('Users', function() {
 	user.save(function(err) {
 		if (err) throw err;
 	});
-	
+
 
 	it('GET /users/', function(done) {
 		request(app)
