@@ -3,42 +3,42 @@ var router = express.Router();
 var UserModel = require('../model/user').UserModel;
 
 
-router.post('/', function(req, res) {
-	var user = new UserModel({
-		firstName: req.body.firstName,
-		lastName: req.body.lastName,
-		email: req.body.email,
-		password: req.body.password
-	});
+router.route('/')
 
-	user.save(function(err) {
-		if (err) {
-			console.log(err);
+	.get(function(req, res) {
+		var l = parseInt(req.query.limit) || 1;
+		if (l <= 0) {
 			res.status(400).end();
+		} else {
+			UserModel.find({}).limit(l).exec(function (err, users) {
+	    		if (err) {
+	    			console.log(err);
+	    			res.status(500).end();
+	    		} else {
+	    			res.json(users)
+	    		}
+	  		});
 		}
+	})
 
-		res.status(200).end();
+	.post(function(req, res) {
+		var user = new UserModel({
+			firstName: req.body.firstName,
+			lastName: req.body.lastName,
+			email: req.body.email,
+			password: req.body.password
+		});
+
+		user.save(function(err) {
+			if (err) {
+				console.log(err);
+				res.status(400).end();
+			}
+
+			res.status(200).end();
+		});
+
 	});
-
-});
-
-
-router.get('/list', function(req, res) {
-	var l = parseInt(req.query.limit) || 1;
-	if (l <= 0) {
-		res.status(400).end();
-	} else {
-		UserModel.find({}).limit(l).exec(function (err, users) {
-    		if (err) {
-    			console.log(err);
-    			res.status(500).end();
-    		} else {
-    			res.json(users)
-    		}
-  		});
-	}
-});
-
 
 router.get('/total', function(req, res) {
 	
