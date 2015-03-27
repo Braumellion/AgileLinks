@@ -16,22 +16,22 @@ describe('Users', function() {
 	});
 
 
-	it('GET /users/', function(done) {
+	it('GET /api/users/', function(done) {
 		request(app)
-			.get('/users/')
+			.get('/api/users/')
 			.expect('Content-Type', /json/)
 			.expect(200, done);
 	});
 
-	it('GET /users/?max=-1 - should receive an 400 error', function(done) {
+	it('GET /api/users/?max=-1 - should receive an 400 error', function(done) {
 		request(app)
-			.get('/users/?max=-1')
+			.get('/api/users/?max=-1')
 			.expect(400, done);
 	});
 
-	it('GET /users/?max=1 - should receive 200 status and array with one element', function(done) {
+	it('GET /api/users/?max=1 - should receive 200 status and array with one element', function(done) {
 		request(app)
-			.get('/users/?max=1')
+			.get('/api/users/?max=1')
 			.expect('Content-Type', /json/)
 			.expect(200)
 			.end(function(err, res) {
@@ -41,9 +41,9 @@ describe('Users', function() {
 			});
 	});
 
-	it('POST /users/ - should receive 200 status', function(done) {
+	it('POST /api/users/ - should receive 200 status', function(done) {
 		request(app)
-			.post('/users/')
+			.post('/api/users/')
 			.send({
 				firstName: 'Jack',
 				lastName: 'Black',
