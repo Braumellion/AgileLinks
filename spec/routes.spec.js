@@ -1,8 +1,21 @@
 var request = require('supertest');
 var app = require('../app.js');
+var UserModel = require('../model/user');
 
 describe('Users', function() {
 	
+	var user = new UserModel({
+		firstName: 'Jack',
+		lastName: 'Black',
+		email: 'jackblack@example.com',
+		password: 'spiderman'
+	});
+
+	user.save(function(err) {
+		if (err) throw err;
+	});
+	
+
 	it('GET /users/', function(done) {
 		request(app)
 			.get('/users/')
@@ -39,5 +52,9 @@ describe('Users', function() {
 			})
 			.expect(200, done);
 	});
+
+	UserModel.remove({}, function(err) { 
+   		console.log('collection removed') 
+	});	
 
 });
