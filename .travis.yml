@@ -6,7 +6,9 @@ node_js:
   - "0.10"
 services:
   - mongodb
-
+env:
+  global:
+    - NODE_ENV=test
 before_script:
   - "sleep 15"
   - mongo test --eval 'db.addUser("test", "test");'
